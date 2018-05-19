@@ -9,5 +9,8 @@
         <module name="myssh" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="myssh" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
