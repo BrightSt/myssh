@@ -1,9 +1,29 @@
 package com.dms.entity;
 
+import javax.persistence.*;
+
+/**
+ * Created by kinthon on 17-6-25.
+ */
+@Entity
+@Table(name="user")
 public class User {
+    private int id;
     private String username;
     private String password;
 
+    @Id
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "username", nullable = false, length = 20)
     public String getUsername() {
         return username;
     }
@@ -12,6 +32,8 @@ public class User {
         this.username = username;
     }
 
+    @Basic
+    @Column(name = "password", nullable = false, length = 20)
     public String getPassword() {
         return password;
     }
@@ -21,10 +43,24 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 }
